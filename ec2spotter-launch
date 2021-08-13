@@ -86,7 +86,7 @@ echo "cloning_file" >> /root/log.txt 2>&1
 git clone --depth=1 https://github.com/WMAPernice/AWS_spotter.git
 echo Got spotter scripts from github.
 
-cd ec2-spotter
+cd AWS_spotter
 
 echo "Swapping root volume" >> /root/log.txt 2>&1
 ./ec2spotter-remount-root  --force 1 --vol_name ${ROOT_VOL_NAME} --vol_region ${ROOT_REGION} $INSTANCE_NAME_PARAM $ELASTIC_IP_PARAM >> /root/log.txt 2>&1
@@ -125,7 +125,7 @@ cat >specs.tmp <<EOF
 }
 EOF
 
-SPOT_REQUEST_ID=$(aws ec2 request-spot-instances --launch-specification file://specs.tmp --type "persistent" --spot-price $ec2spotter_bid_price --output="text" --query="SpotInstanceRequests[*].SpotInstanceRequestId" --region ${LAUNCH_REGION})
+SPOT_REQUEST_ID=$(aws ec2 request-spot-instances --launch-specification file://specs.tmp --spot-price $ec2spotter_bid_price --type "persistent" --output="text" --query="SpotInstanceRequests[*].SpotInstanceRequestId" --region ${LAUNCH_REGION})
 
 # echo "Spot request id: $SPOT_REQUEST_ID"
 echo $SPOT_REQUEST_ID
