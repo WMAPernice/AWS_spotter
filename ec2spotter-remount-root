@@ -216,11 +216,13 @@ mount $DEVICE $NEWMNT
 cd $NEWMNT
 pivot_root . ./$OLDMNT
 
-for dir in /dev /proc /sys /run; do
-    echo "Moving mounted file system ${OLDMNT}\${dir} to \$dir."
-    mount --move ./${OLDMNT}\${dir} \${dir}
-done
 exec chroot . /sbin/init
 EOF11
 chmod +x /sbin/init
 shutdown -r now
+
+
+# for dir in /dev /proc /sys /run; do
+#     echo "Moving mounted file system ${OLDMNT}\${dir} to \$dir."
+#     mount --move ./${OLDMNT}\${dir} \${dir}
+# done

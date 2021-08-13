@@ -34,4 +34,4 @@ echo 'Alternatively, use aliases: aws-ssh, aws-terminate, aws-state ...'
 
 alias aws-ssh='ssh -i ~/.ssh/CUMC_WP_AWS_key.pem -o UserKnownHostsFile=/dev/null ubuntu@$ip'
 alias aws-state='aws ec2 describe-instances --instance-ids $instance_id --query "Reservations[0].Instances[0].State.Name"'
-alias aws-terminate='aws ec2 terminate-instances --instance-ids $instance_id'
+alias aws-terminate='aws ec2 terminate-instances --instance-ids $instance_id; aws ec2 cancel-spot-instance-requests --spot-instance-request-ids $request_id'
