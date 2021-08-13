@@ -125,8 +125,7 @@ cat >specs.tmp <<EOF
 }
 EOF
 
-SPOT_REQUEST_ID=$(aws ec2 request-spot-instances --launch-specification file://specs.tmp --spot-price $ec2spotter_bid_price --output="text" --query="SpotInstanceRequests[*].SpotInstanceRequestId" --region ${LAUNCH_REGION})
-# SPOT_REQUEST_ID=$(aws ec2 request-spot-instances --launch-specification file://specs.tmp --output="text" --query="SpotInstanceRequests[*].SpotInstanceRequestId" --region ${LAUNCH_REGION})
+SPOT_REQUEST_ID=$(aws ec2 request-spot-instances --launch-specification file://specs.tmp --type "persistent" --spot-price $ec2spotter_bid_price --output="text" --query="SpotInstanceRequests[*].SpotInstanceRequestId" --region ${LAUNCH_REGION})
 
 # echo "Spot request id: $SPOT_REQUEST_ID"
 echo $SPOT_REQUEST_ID
