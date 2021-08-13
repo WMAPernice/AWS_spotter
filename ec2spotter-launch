@@ -89,6 +89,7 @@ echo Got spotter scripts from github.
 cd AWS_spotter
 
 echo "Swapping root volume" >> /root/log.txt 2>&1
+chmod +x ec2spotter-remount-root
 ./ec2spotter-remount-root  --force 1 --vol_name ${ROOT_VOL_NAME} --vol_region ${ROOT_REGION} $INSTANCE_NAME_PARAM $ELASTIC_IP_PARAM >> /root/log.txt 2>&1
 EOF
 
